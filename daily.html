@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tacoguesser Daily</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&display=swap" rel="stylesheet">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1987662660070983"
+     crossorigin="anonymous"></script>
+</head>
+<body>
+
+    <div class="container">
+        <header>
+            <h1>TACOGUESSER</h1>
+            <p>Codzienne wyzwanie – jedna piosenka dziennie dla każdego!</p>
+        </header>
+
+        <div id="message-box" class="message-box">
+            Ładowanie wyzwania dziennego...
+        </div>
+
+        <div class="hints-panel">
+            <button id="hint-year-btn" class="hint-btn locked" disabled>💡 Rok wydania (5 prób)</button>
+            <button id="hint-album-btn" class="hint-btn locked" disabled>💡 Album (8 prób)</button>
+            <button id="hint-duration-btn" class="hint-btn locked" disabled>💡 Czas trwania (13 prób)</button>
+        </div>
+
+        <div class="game-board">
+            <div id="input-section-container" class="input-section">
+                <input type="text" id="guess-input" placeholder="Wpisz tytuł lub album..." autocomplete="off">
+                <div id="suggestions" class="suggestions-box"></div>
+            </div>
+
+            <div class="mode-switch-container">
+                <button type="button" class="nav-mode-btn" onclick="location.href='endless.html'">Endless</button>
+            </div>
+
+            <div class="table-headers">
+                <span>Grafika</span>
+                <span>Utwór</span>
+                <span>Album</span>
+                <span>Rok</span>
+                <span>Czas</span>
+                <span>Produkcja</span>
+                <span>Przesłuchania</span>
+            </div>
+
+            <div id="guesses-grid" class="guesses-grid"></div>
+        </div>
+        <button type="button" class="nav-mode-btn menu-btn-bottom" onclick="location.href='index.html'">Menu</button>
+    </div>
+
+    <div id="endgame-modal" class="modal hidden">
+        <div class="modal-content">
+            <h2 id="modal-title">Gratulacje! Zadanie ukończone</h2>
+            <div id="modal-img-container"></div>
+            <p id="modal-text"></p>
+            <div class="modal-actions">
+                <button id="close-modal-btn" class="secondary-btn" style="display:none;">Zamknij</button>
+                <button id="restart-btn" style="display:none;">Zagraj ponownie</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        window.isDailyMode = true;
+    </script>
+    <script src="songs.js"></script>
+    <script src="autocomplete.js"></script>
+    <script src="hints.js"></script>
+    <script src="game.js"></script>
+</body>
+</html>

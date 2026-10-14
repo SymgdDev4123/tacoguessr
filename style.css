@@ -1,0 +1,463 @@
+:root {
+    --panel-bg: #1a1a1a;
+    --text-color: #e0e0e0;
+    --primary-color: #d1b87a;
+    --correct-color: #2e6d42;
+    --partial-color: #b08d35;
+    --wrong-color: #5c2222;
+    --border-color: #333333;
+}
+
+@keyframes waveBg {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+body {
+    font-family: 'Montserrat', sans-serif;
+    background: linear-gradient(135deg, #0c0c0c, #1f1418, #111a1f, #0c0c0c);
+    background-size: 400% 400%;
+    animation: waveBg 15s ease infinite;
+    color: var(--text-color);
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+    font-size: 90%;
+}
+
+.container {
+    width: 100%;
+    max-width: 1250px;
+    padding: 18px;
+    text-align: center;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    min-height: 100vh;
+}
+
+header h1 {
+    font-weight: 800;
+    letter-spacing: 3.6px;
+    color: var(--primary-color);
+    margin-bottom: 4.5px;
+    margin-top: 18px;
+    font-size: 1.8rem;
+}
+
+header p {
+    color: #999;
+    font-size: 12.6px;
+    margin-bottom: 13.5px;
+}
+
+.message-box {
+    background-color: var(--panel-bg);
+    border: 1px solid var(--primary-color);
+    border-radius: 7.2px;
+    padding: 10.8px 13.5px;
+    margin-bottom: 13.5px;
+    font-size: 12.6px;
+    color: var(--primary-color);
+    min-height: 18px;
+    box-shadow: 0 3.6px 5.4px rgba(0,0,0,0.3);
+}
+
+.hints-panel {
+    display: flex;
+    gap: 7.2px;
+    margin-bottom: 18px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.hint-btn {
+    background-color: #332d1d;
+    border: 1px solid var(--primary-color);
+    color: var(--primary-color);
+    padding: 7.2px 10.8px;
+    font-size: 9.9px;
+    font-weight: 600;
+    border-radius: 5.4px;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.hint-btn:hover:not(:disabled) {
+    background-color: var(--primary-color);
+    color: #121212;
+}
+
+.hint-btn.locked {
+    background-color: #1a1a1a;
+    border-color: #333;
+    color: #555;
+    cursor: not-allowed;
+}
+
+.input-section {
+    position: relative;
+    display: flex;
+    gap: 10.8px;
+    margin-bottom: 13.5px;
+    justify-content: center;
+}
+
+input[type="text"] {
+    flex: 1;
+    max-width: 315px;
+    padding: 12.6px 16.2px;
+    background-color: var(--panel-bg);
+    border: 1px solid var(--border-color);
+    color: var(--text-color);
+    border-radius: 7.2px;
+    font-size: 14.4px;
+    outline: none;
+    height: 43.2px;
+    box-sizing: border-box;
+}
+
+input[type="text"]:focus {
+    border-color: var(--primary-color);
+}
+
+button#guess-btn, .nav-mode-btn {
+    padding: 0 27px;
+    background-color: var(--primary-color);
+    color: #121212;
+    border: none;
+    font-weight: 700;
+    border-radius: 7.2px;
+    cursor: pointer;
+    font-size: 14.4px;
+    height: 43.2px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    transition: filter 0.2s;
+    box-sizing: border-box;
+}
+
+button#guess-btn:hover, .nav-mode-btn:hover {
+    filter: brightness(1.1);
+}
+
+.mode-switch-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 13.5px;
+    margin-bottom: 27px; 
+}
+
+.suggestions-box {
+    position: absolute;
+    top: 50.4px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    max-width: 450px;
+    background: var(--panel-bg);
+    border: 1px solid var(--border-color);
+    border-top: none;
+    border-radius: 0 0 7.2px 7.2px;
+    max-height: 225px;
+    overflow-y: auto;
+    z-index: 100;
+    text-align: left;
+    box-sizing: border-box;
+}
+
+.suggestion-item {
+    padding: 7.2px 10.8px;
+    cursor: pointer;
+    font-size: 11.7px;
+    border-bottom: 1px solid var(--border-color);
+    display: flex;
+    align-items: center;
+    gap: 9px;
+}
+
+.suggestion-item:hover {
+    background-color: #2a2a2a;
+}
+
+.suggestion-img {
+    width: 28.8px;
+    height: 28.8px;
+    object-fit: cover;
+    border-radius: 3.6px;
+    flex-shrink: 0;
+}
+
+.suggestion-text {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.suggestion-title {
+    font-weight: 700;
+    color: var(--text-color);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.suggestion-info {
+    font-size: 9.9px;
+    color: #999;
+}
+
+.table-headers, .guess-row {
+    display: grid;
+    grid-template-columns: 63px 1.2fr 1.2fr 0.7fr 0.7fr 1.2fr 1fr;
+    gap: 9px;
+    align-items: center;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.table-headers {
+    font-size: 9.9px;
+    color: #888;
+    margin-bottom: 13.5px;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.table-headers span {
+    text-align: center;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.guesses-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 10.8px;
+    max-height: calc(7 * 67.5px + 6 * 10.8px);
+    overflow-y: auto;
+    padding-right: 4.5px;
+    margin-bottom: 18px;
+}
+
+.guesses-grid::-webkit-scrollbar {
+    width: 5.4px;
+}
+
+.guesses-grid::-webkit-scrollbar-thumb {
+    background-color: var(--border-color);
+    border-radius: 3.6px;
+}
+
+@keyframes tileAppear {
+    0% {
+        opacity: 0;
+        transform: translateY(-13.5px) scale(0.9);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+.guess-tile, .guess-tile-img {
+    animation: tileAppear 0.4s ease forwards;
+    opacity: 0;
+}
+
+.guess-tile {
+    background-color: var(--wrong-color);
+    border: 1px solid var(--border-color);
+    padding: 7.2px 3.6px;
+    font-size: 9.9px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 5.4px;
+    font-weight: 700;
+    text-align: center;
+    word-break: break-word;
+    min-height: 49.5px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.guess-tile-img {
+    background-color: var(--panel-bg);
+    border: 1px solid var(--border-color);
+    padding: 0;
+    width: 63px;
+    height: 63px;
+    border-radius: 5.4px;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+    margin: 0 auto;
+}
+
+.guess-tile-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.guess-tile.correct { 
+    background-color: var(--correct-color); 
+    border-color: #3fa35b;
+}
+
+.guess-tile.partial {
+    background-color: var(--partial-color);
+    border-color: #b08d35;
+}
+
+.guess-tile.wrong { 
+    background-color: var(--wrong-color); 
+    border-color: #8a3535;
+}
+
+.menu-btn-bottom {
+    margin-top: auto;
+    margin-bottom: 18px;
+    width: 100%;
+    max-width: 200px;
+    height: 43.2px;
+    font-size: 14.4px;
+    padding: 0 27px;
+    align-self: center;
+}
+
+.modal {
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0,0,0,0.85);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 100;
+}
+
+.modal.hidden { display: none !important; }
+
+.modal-content {
+    background: var(--panel-bg);
+    padding: 27px;
+    border-radius: 9px;
+    text-align: center;
+    border: 1px solid var(--primary-color);
+    max-width: 360px;
+    width: 90%;
+    box-sizing: border-box;
+    position: relative;
+}
+
+.modal-content h2 {
+    color: var(--primary-color);
+    margin-top: 0;
+}
+
+.modal-img {
+    width: 108px;
+    height: 108px;
+    object-fit: cover;
+    border-radius: 7.2px;
+    margin-bottom: 13.5px;
+    border: 1px solid var(--primary-color);
+}
+
+.modal-actions {
+    display: flex;
+    gap: 9px;
+    justify-content: center;
+    margin-top: 13.5px;
+    flex-wrap: wrap;
+}
+
+.modal-content button {
+    padding: 9px 18px;
+    background-color: var(--primary-color);
+    color: #121212;
+    border: none;
+    font-weight: 700;
+    border-radius: 5.4px;
+    cursor: pointer;
+}
+
+.modal-content button.secondary-btn {
+    background-color: transparent;
+    border: 1px solid var(--primary-color);
+    color: var(--primary-color);
+}
+
+@media (max-width: 768px) {
+    .container {
+        padding: 9px;
+    }
+
+    header h1 {
+        font-size: 21.6px;
+        letter-spacing: 1.8px;
+    }
+
+    header p {
+        font-size: 10.8px;
+    }
+
+    .input-section {
+        flex-direction: column;
+        gap: 7.2px;
+    }
+
+    input[type="text"] {
+        max-width: 100%;
+    }
+
+    button#guess-btn {
+        width: 100%;
+    }
+
+    .table-headers {
+        display: none;
+    }
+
+    .guess-row {
+        display: flex;
+        flex-direction: column;
+        background: var(--panel-bg);
+        border: 1px solid var(--border-color);
+        border-radius: 7.2px;
+        padding: 10.8px;
+        gap: 7.2px;
+    }
+
+    .guess-tile-img {
+        width: 72px;
+        height: 72px;
+        margin-bottom: 4.5px;
+    }
+
+    .guess-tile {
+        width: 100%;
+        font-size: 11.7px;
+        min-height: 36px;
+        justify-content: space-between;
+        padding: 7.2px 10.8px;
+    }
+
+    .guess-tile:nth-child(2)::before { content: "Utwór: "; font-weight: 400; color: #aaa; }
+    .guess-tile:nth-child(3)::before { content: "Album: "; font-weight: 400; color: #aaa; }
+    .guess-tile:nth-child(4)::before { content: "Rok: "; font-weight: 400; color: #aaa; }
+    .guess-tile:nth-child(5)::before { content: "Czas: "; font-weight: 400; color: #aaa; }
+    .guess-tile:nth-child(6)::before { content: "Produkcja: "; font-weight: 400; color: #aaa; }
+    .guess-tile:nth-child(7)::before { content: "Przesłuchania: "; font-weight: 400; color: #aaa; }
+}

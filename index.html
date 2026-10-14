@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tacoguesser - Wybierz Tryb</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <div class="container landing-container">
+        <header>
+            <h1>TACOGUESSER</h1>
+            <p>Wybierz tryb gry i sprawdź swoją wiedzę o twórczości Taco Hemingwaya!</p>
+        </header>
+
+        <div class="menu-box">
+            <h2>Wybierz tryb rozgrywki</h2>
+            <div class="menu-buttons">
+                <button type="button" class="nav-mode-btn" onclick="location.href='endless.html'">ENDLESS</button>
+                <button type="button" class="nav-mode-btn" onclick="location.href='daily.html'">DAILY</button>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
+<style>
+.landing-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.menu-box {
+    background-color: var(--panel-bg);
+    border: 1px solid var(--primary-color);
+    border-radius: 12px;
+    padding: 40px 30px;
+    width: 100%;
+    max-width: 450px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.5);
+    box-sizing: border-box;
+    margin-top: 20px;
+}
+
+.menu-box h2 {
+    color: var(--text-color);
+    font-size: 20px;
+    margin-bottom: 25px;
+    font-weight: 600;
+}
+
+.menu-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.menu-buttons .nav-mode-btn {
+    width: 100%;
+    height: 48px;
+}
+</style>
